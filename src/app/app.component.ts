@@ -6,11 +6,11 @@ import { FormGroup, FormControl } from '@angular/forms';
   template: `
     <form [formGroup]="form" style="display: flex; flex-direction: column;">
       <label for="firstName">Enter your name</label>
-      <input type="text" formControlName="firstName" />
+      <input type="text" formControlName="firstname" />
       <label for="lastName">Enter your last name</label>
-      <input type="text" formControlName="lastName" />
+      <input type="text" formControlName="lastname" />
       <label for="email">Enter your name</label>
-      <input type="text" formControlName="email" />
+      <input type="text" formControlName="twitter" />
       <label for="age">Enter your age</label>
       <input type="number" formControlName="age" />
     </form>
@@ -23,16 +23,21 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class AppComponent {
   title = 'Angular-Reactive-Form';
 
-  person = {
+  form!: FormGroup;
+  person: any = {
     firstname: 'Coder',
-    age: 2,
+    age: 25,
     lastname: 'Byte',
-    email: 'ali@example.com',
+    twitter: '@coderbyte',
   };
-  form = new FormGroup({
-    firstName: new FormControl(this.person.firstname),
-    age: new FormControl(this.person.age),
-    lastName: new FormControl(this.person.lastname),
-    email: new FormControl(this.person.email),
-  });
+  personProps: string[] = [];
+
+  ngOnInit() {
+    const formDataObj: any = {};
+    for (const prop of Object.keys(this.person)) {
+      formDataObj[prop] = new FormControl(this.person[prop]);
+      this.personProps.push(prop);
+    }
+    this.form = new FormGroup(formDataObj);
+  }
 }
