@@ -25,9 +25,9 @@ export class AppComponent {
 
   person = {
     firstname: 'Coder',
-    age: 25,
+    age: 2,
     lastname: 'Byte',
-    email: '@coderbyte',
+    email: 'ali@example.com',
   };
   form = new FormGroup({
     firstName: new FormControl(this.person.firstname),
